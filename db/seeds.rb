@@ -1,6 +1,6 @@
 player = Player.create(name: "Carl", health: 100, biography: "A young pumpkin.")
 
-level1 = Level.create(name: "Forest Temple", player_id: player)
+level1 = Level.create(name: "Forest Temple", player: player)
 
 inv = Inventory.create()
 

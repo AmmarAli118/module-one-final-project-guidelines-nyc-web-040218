@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_04_17_171944) do
+ActiveRecord::Schema.define(version: 2018_04_17_172725) do
 
   create_table "items", force: :cascade do |t|
     t.string "name"
@@ -18,6 +18,11 @@ ActiveRecord::Schema.define(version: 2018_04_17_171944) do
     t.boolean "in_inventory"
     t.integer "level_id"
     t.integer "inventory_id"
+  end
+
+  create_table "levels", force: :cascade do |t|
+    t.string "name"
+    t.integer "player_id"
   end
 
 end

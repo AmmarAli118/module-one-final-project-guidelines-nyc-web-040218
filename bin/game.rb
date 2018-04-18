@@ -28,7 +28,7 @@ if player_input.downcase == "start"
       string = gets.chomp
       player_character.pick_up(string)
     elsif player_command.downcase == "inventory"
-      player_character.inventory 
+      player_character.inventory
     elsif player_command.downcase == "use"
     end
   end

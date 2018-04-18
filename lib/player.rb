@@ -28,7 +28,7 @@ class Player < ActiveRecord::Base
   def pick_up(item_str)
     item_obj = parse_item_str(item_str)
     if item_obj == nil
-      p "You don't see one of those."
+      p "You don't see one of those here."
     else
       Item.update(item_obj.id, in_inventory: true)
       p "Picked up #{item_str}."

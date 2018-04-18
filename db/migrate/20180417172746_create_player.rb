@@ -4,6 +4,7 @@ class CreatePlayer < ActiveRecord::Migration[5.2]
       t.string :name
       t.integer :health
       t.text :biography
+      t.integer :room_id
     end
   end
 end

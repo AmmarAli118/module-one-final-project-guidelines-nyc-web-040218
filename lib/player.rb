@@ -25,6 +25,20 @@ class Player < ActiveRecord::Base
     Item.all.find {|item| item.name == item_str && item.room_id == self.room_id}
   end
 
+  def move(str)
+    cardinal = ["north", "south", "east", "west"]
+    if cardinal.include?(str.downcase)
+      if self.room[str.downcase.to_sym] != nil
+        Player.update(1, :room_id => self.room[str.downcase.to_sym])
+      else
+        "You just walked into a wall. Ouch!"
+      end
+    else
+      p "I pity the fool who thinks #{str} is a direction!"
+    end
+  end
+
+
   def pick_up(item_str)
     item_obj = parse_item_str(item_str)
     if item_obj == nil

@@ -11,6 +11,7 @@ if player_input.downcase == "start"
   player_character = Player.create(player_character_name)
   print "Your name is #{player_character_name}. "
   puts player_character.biography
+  p player_character.room.description
   while continue == true
     puts "Type a commnand to move on or exit to leave (hint try 'help'):"
     player_command = gets.chomp
@@ -20,9 +21,11 @@ if player_input.downcase == "start"
     elsif player_command.downcase == "help"
       puts "Possible commands: look, move, pick up, inventory, use."
     elsif player_command.downcase == "look"
-
+      p player_character.room.description
     elsif player_command.downcase == "move"
-
+      p "In which direction would you like to move?"
+      direction = gets.chomp
+      player_character.move(direction)
     elsif player_command.downcase == "pick up"
       puts "What would you like to pick up?"
       string = gets.chomp

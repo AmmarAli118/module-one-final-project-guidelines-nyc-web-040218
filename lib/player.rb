@@ -31,13 +31,14 @@ class Player < ActiveRecord::Base
       if self.room[str.downcase.to_sym] != nil
         Player.update(1, :room_id => self.room[str.downcase.to_sym])
       else
-        "You just walked into a wall. Ouch!"
+        p "You just walked into a wall. Ouch!"
+        self
       end
     else
       p "I pity the fool who thinks #{str} is a direction!"
+      self
     end
   end
-
 
   def pick_up(item_str)
     item_obj = parse_item_str(item_str)

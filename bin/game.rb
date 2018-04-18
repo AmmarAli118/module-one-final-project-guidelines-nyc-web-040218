@@ -9,9 +9,10 @@ if player_input.downcase == "start"
   print "Name your character:"
   player_character_name = gets.chomp
   player_character = Player.create(player_character_name)
-  p player_character.biography
+  print "Your name is #{player_character_name}. "
+  puts player_character.biography
   while continue == true
-    p "Type a commnand to move on or exit to leave (hint try 'help'):"
+    puts "Type a commnand to move on or exit to leave (hint try 'help'):"
     player_command = gets.chomp
     if player_command.downcase == "exit"
       continue = false

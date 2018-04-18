@@ -4,8 +4,8 @@ class CreateItem < ActiveRecord::Migration[5.2]
       t.string :name
       t.string :category
       t.boolean :in_inventory
-      t.integer :level_id
-      t.integer :inventory_id
+      t.integer :room_id
+      t.integer :player_id
     end
   end
 end

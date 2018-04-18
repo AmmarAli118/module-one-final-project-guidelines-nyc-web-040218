@@ -1,4 +1,4 @@
 class Item < ActiveRecord::Base
-  belongs_to :level
-  belongs_to :inventory
+  belongs_to :room
+  belongs_to :player
 end

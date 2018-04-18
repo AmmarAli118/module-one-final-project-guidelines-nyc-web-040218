@@ -1,8 +1,8 @@
 require 'pry'
-
 class Player < ActiveRecord::Base
   has_many :levels
-  has_one :inventory
+  has_many :items
+  has_many :rooms, through: :items
 
   def self.create(name)
     super(name: name, health: 100, biography: "You are a young alchemist who is about graduate from The Flatcopper Alchemy bootcamp and today is your final test. \n To graduate you must find two halves of a broken key and use your alchemy skills to repair it.")

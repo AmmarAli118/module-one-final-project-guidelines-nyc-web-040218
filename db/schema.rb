@@ -10,34 +10,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_04_17_200827) do
-
-  create_table "doors", force: :cascade do |t|
-    t.boolean "is_open"
-  end
-
-  create_table "enemies", force: :cascade do |t|
-    t.string "name"
-    t.integer "damage"
-  end
-
-  create_table "items", force: :cascade do |t|
-    t.string "name"
-    t.string "category"
-    t.boolean "in_inventory"
-    t.integer "level_id"
-    t.integer "inventory_id"
-  end
-
-  create_table "levels", force: :cascade do |t|
-    t.string "name"
-    t.integer "player_id"
-  end
-
-  create_table "players", force: :cascade do |t|
-    t.string "name"
-    t.integer "health"
-    t.text "biography"
-  end
+ActiveRecord::Schema.define(version: 0) do
 
 end

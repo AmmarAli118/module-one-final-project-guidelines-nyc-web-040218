@@ -7,6 +7,24 @@ def exit
   `rake db:seed`
   puts "Goodbye! Thanks for playing!"
 end
+#
+# prompt = TTY::Prompt.new
+# font = TTY::Font.new(:doom)
+# pastel = Pastel.new
+#
+# puts "\n"
+# puts pastel.bright_white.bold(font.write("THE       ALCHEMIST"))
+# puts "\n"
+#
+
+# prompt = TTY::Prompt.new
+# prompt.ask("Type start to begin game or exit to leave:", default: ENV['exit'])
+# puts "\n"
+# prompt.ask("Name your character:")
+# puts "\n"
+
+#
+# prompt.select("What do you do?", %w(Look Move Pick\ up Inventory Transmute Help))
 
 puts "Welcome to The Alchemist.\n\n"
 print "Type start to begin game or exit to leave: "
@@ -50,7 +68,7 @@ if player_input.downcase == "start"
         continue = false
         exit
       else
-        player_character.room = player_character.pick_up(string.downcase)
+        player_character = player_character.pick_up(string.downcase)
       end
 
     elsif player_command.downcase == "inventory"

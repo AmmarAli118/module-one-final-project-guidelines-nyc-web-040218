@@ -48,7 +48,7 @@ class Player < ActiveRecord::Base
       Room.update(self.room_id, :description => string )
       Item.update(item_obj.id, in_inventory: true)
       puts "Picked up #{item_str}."
-      self.room
+      self.reload
     end
   end
 

@@ -16,6 +16,6 @@ door1 = Door.create(is_open: false, room_id: 2)
 map = Item.create(name: "map", category: "map", in_inventory: false, room: room1, player_id: 1)
 sledge = Item.create(name: "sledgehammer", category: "item", in_inventory: false, room: room2, player_id: 1)
 
-key_half_one = Item.create(name: "broken key1", category: "material component", in_inventory: false, room: room3, player_id: 1)
-key_half_two = Item.create(name: "broken key2", category: "material component", in_inventory: false, room: room4, player_id: 1)
+key_half_one = Item.create(name: "broken key shaft", category: "material component", in_inventory: false, room: room3, player_id: 1)
+key_half_two = Item.create(name: "broken key", category: "material component", in_inventory: false, room: room4, player_id: 1)
 whole_key = Item.create(name: "key", category: "#{key_half_one.name} #{key_half_two.name}", in_inventory: false, room_id: nil, player_id: 1)

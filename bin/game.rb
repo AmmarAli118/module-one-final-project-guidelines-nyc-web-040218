@@ -3,7 +3,7 @@ require_all 'lib'
 
 def exit
   `rake db:rollback STEP=6`
-  puts "Goodbye! Thanks for playing!"
+  puts "\nGoodbye! Thanks for playing!"
 end
 
 prompt = TTY::Prompt.new
@@ -13,6 +13,9 @@ pastel = Pastel.new
 puts "\n"
 puts pastel.bright_white.bold(font.write("THE       ALCHEMIST"))
 puts "\n"
+
+`rake db:migrate`
+`rake db:seed`
 
 
 # prompt = TTY::Prompt.new
@@ -26,21 +29,25 @@ puts "\n"
 
 # puts "Welcome to The Alchemist.\n\n"
 print "Type start to begin game or exit to leave: "
-player_input = gets.chomp
+player_input = gets.strip
 
-if player_input.downcase == "start"
+  if player_input.downcase != "start" && player_input.downcase != "exit"
+    print "Type start to begin game or exit to leave: "
+    player_input = gets.strip
+  elsif player_input.downcase == "start"
   continue = true
-  `rake db:migrate`
-  `rake db:seed`
   print "\nName your character: "
-  player_character_name = gets.chomp
+  player_character_name = gets.strip
   player_character = Player.create(player_character_name)
+  puts "\n"
   puts "Your name is #{player_character_name}."
-  puts player_character.biography + "\n\n"
-  puts player_character.room.description + "\n\n"
+  puts "\n"
+  puts player_character.biography
+  puts "\n"
+  puts player_character.room.description
 
   while continue == true
-    puts "Type a command to move on, or exit to leave (hint try 'help'):"
+    puts "\nType a command to move on, or exit to leave (hint try 'help'):"
     player_command = gets.chomp
 
     if player_command.downcase == "exit"
@@ -48,48 +55,73 @@ if player_input.downcase == "start"
       continue = false
 
     elsif player_command.downcase == "help"
-      puts "\nPossible commands: look, move, pick up, unlock, inventory, destroy and transmute.\n\n"
+      puts "\nPossible commands: look, move, pick up, map, inventory, unlock, destroy and transmute."
+
+    elsif player_command.downcase == "map"
+      puts "                           ________________________                \n
+                          |                        |               \n
+                          |        Room 1          |               \n
+                          |                        |               \n
+            ______________|_________      _________|______________ \n
+           |              |                        |              |\n
+           |    Room 3              Room 2             Room 4     |\n
+           |              |                        |              |\n
+           |______________|___________++___________|______________|\n
+                          |                        |               \n
+                          |        Room 5          |               \n
+                          |                        |               \n
+                          |________________________|               \n"
+      puts "\n"
+      puts "You are in room #{player_character.room_id}."
 
     elsif player_command.downcase == "look"
+      puts "\n"
       puts player_character.room.description
 
     elsif player_command.downcase == "move"
       puts "\nIn which direction would you like to move?"
       direction = gets.chomp
+      puts "\n"
       player_character = player_character.move(direction)
       ## Update room description when you pick up an item, so that it no longer says it is there.
+      puts "\n"
       puts player_character.room.description
 
     elsif player_command.downcase == "pick up"
-      puts "What would you like to pick up?"
+      puts "\nWhat would you like to pick up?"
       string = gets.chomp
       if string.downcase == "diploma"
-        puts "You have successfully passed your test! You win!"
+        puts "\nYou have successfully passed your test! You win!"
         continue = false
         exit
       else
+        puts "\n"
         player_character.pick_up(string.downcase)
       end
 
     elsif player_command.downcase == "inventory"
+      puts "\n"
       player_character.inventory
 
     elsif player_command.downcase == "transmute"
-      puts "What is your first item?"
+      puts "\nWhat is your first item?"
       string1 = gets.chomp
       puts "\nWhat is your second item?"
       string2 = gets.chomp
+      puts "\n"
       player_character.combine(string1, string2)
 
     elsif player_command.downcase == "destroy"
-      puts "What item would you like to destroy?"
+      puts "\nWhat item would you like to destroy?"
       user_item = gets.chomp
+      puts "\n"
       player_character.destroy(user_item)
 
     elsif player_command.downcase == "unlock"
+      puts "\n"
       player_character.unlock_door
     else
-      puts "Invalid command. Try 'help' if you are stuck."
+      puts "\nInvalid command. Try 'help' if you are stuck."
     end
 
   end

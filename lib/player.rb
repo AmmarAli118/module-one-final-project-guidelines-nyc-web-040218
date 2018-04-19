@@ -87,6 +87,8 @@ class Player < ActiveRecord::Base
       if have?(whole_key)
         puts "You unlock the southern door."
         Door.update(1, :is_open => true)
+      elsif Door.find(1).is_open == true
+        puts "You've already unlocked the door!"
       else
         puts "You need a key to unlock the door."
       end

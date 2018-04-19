@@ -71,7 +71,6 @@ class Player < ActiveRecord::Base
     if have?(item1) && have?(item2)
       if item1.category == item2.category && item1.category == "material component"
         new_item = Item.all.find {|item| item.category.include?(str1) && item.category.include?(str2)}
-        binding.pry
         Item.update(new_item.id, in_inventory: true)
         Item.update(item1.id, in_inventory: false, room_id: nil)
         Item.update(item2.id, in_inventory: false, room_id: nil)

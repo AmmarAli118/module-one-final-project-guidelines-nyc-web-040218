@@ -1,5 +1,4 @@
 require_relative '../config/environment.rb'
-# require 'sinatra/activerecord/rake'
 require_all 'lib'
 
 def exit
@@ -34,7 +33,7 @@ if player_input.downcase == "start"
       puts "\nPossible commands: look, move, pick up, inventory, use.\n\n"
 
     elsif player_command.downcase == "look"
-      puts "\n" + player_character.room.description
+      puts player_character.room.description
 
     elsif player_command.downcase == "move"
       puts "\nIn which direction would you like to move?"
@@ -62,7 +61,7 @@ if player_input.downcase == "start"
       puts "What item would you like to use?"
       user_item = gets.chomp
       player_character.use(user_item)
-      
+
     else
       puts "Invalid command. Try 'help' if you are stuck."
     end

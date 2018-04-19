@@ -1,5 +1,13 @@
-require_relative '../config/environment'
+require_relative '../config/environment.rb'
+# require 'sinatra/activerecord/rake'
 require_all 'lib'
+
+def exit
+  `rake db:rollback STEP=6`
+  `rake db:migrate`
+  `rake db:seed`
+  puts "Goodbye! Thanks for playing!"
+end
 
 puts "Welcome to The Alchemist.\n\n"
 print "Type start to begin game or exit to leave: "
@@ -19,8 +27,8 @@ if player_input.downcase == "start"
     player_command = gets.chomp
 
     if player_command.downcase == "exit"
+      exit
       continue = false
-      puts "Goodbye! Thanks for playing!"
 
     elsif player_command.downcase == "help"
       puts "\nPossible commands: look, move, pick up, inventory, use.\n\n"
@@ -31,7 +39,8 @@ if player_input.downcase == "start"
     elsif player_command.downcase == "move"
       puts "\nIn which direction would you like to move?"
       direction = gets.chomp
-      player_character = player_character.move(direction) #the update method in .move saves the new value to the db, but does not update our player variable, so it must be updated as well.
+      player_character = player_character.move(direction)
+      ## Update room description when you pick up an item, so that it no longer says it is there.
       puts player_character.room.description
 
     elsif player_command.downcase == "pick up"
@@ -47,14 +56,16 @@ if player_input.downcase == "start"
       string1 = gets.chomp
       puts "\nWhat is your second item?"
       string2 = gets.chomp
-      new_item = player_character.combine(string1, string2)
+      player_character.combine(string1, string2)
 
     elsif player_command.downcase == "use"
+
+    else
+      puts "Invalid command. Try 'help' if you are stuck."
     end
 
   end
 
 elsif player_input.downcase == "exit"
-  puts "Goodbye! Thanks for playing!"
-  #system rake db:reset
+  exit
 end

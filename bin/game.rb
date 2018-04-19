@@ -50,6 +50,9 @@ if player_input.downcase == "start"
       new_item = player_character.combine(string1, string2)
 
     elsif player_command.downcase == "use"
+      puts "What item would you like to use?"
+      user_item = gets.chomp
+      player_character.use(user_item)
     end
 
   end

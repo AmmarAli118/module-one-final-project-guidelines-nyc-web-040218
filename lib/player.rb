@@ -28,7 +28,10 @@ class Player < ActiveRecord::Base
   def move(str)
     cardinal = ["north", "south", "east", "west"]
     if cardinal.include?(str.downcase)
-      if self.room[str.downcase.to_sym] != nil
+      if (self.room_id == 2 && str.downcase == "south") && Door.all.find {|a_door| a_door.room_id == 2}.is_open == false
+        puts "You must unlock the door before moving in that direction."
+        self
+      elsif self.room[str.downcase.to_sym] != nil
         puts "You move #{str}."
         Player.update(1, :room_id => self.room[str.downcase.to_sym])
       else
@@ -51,6 +54,11 @@ class Player < ActiveRecord::Base
     if item_obj.nil?
       puts "You don't see one of those here."
     else
+      string = self.room.description.split(".")
+      string.pop
+      string = string.join(".")
+      binding.pry
+      Room.update(self.room_id, :description => string )
       Item.update(item_obj.id, in_inventory: true)
       puts "Picked up #{item_str}."
     end
@@ -88,6 +96,17 @@ class Player < ActiveRecord::Base
       self.read(item_obj)
     # else
 
+    end
+  end
+
+  def unlock_door
+    if self.room.id = 2 && Door.all.find {|a_door| a_door.room_id == 2}.is_open == false
+      whole_key = self.parse_item_str("key")
+      if self.have?(whole_key)
+        Door.update(1, :is_open => true)
+      else
+        puts "You need a key to unlock the door."
+      end
     end
   end
 end

@@ -34,7 +34,7 @@ if player_input.downcase == "start"
       puts "\nPossible commands: look, move, pick up, inventory, use.\n\n"
 
     elsif player_command.downcase == "look"
-      puts "\n" + player_character.room.description
+      puts player_character.room.description
 
     elsif player_command.downcase == "move"
       puts "\nIn which direction would you like to move?"
@@ -46,7 +46,7 @@ if player_input.downcase == "start"
     elsif player_command.downcase == "pick up"
       puts "What would you like to pick up?"
       string = gets.chomp
-      player_character.pick_up(string.downcase)
+      player_character.room = player_character.pick_up(string.downcase)
 
     elsif player_command.downcase == "inventory"
       player_character.inventory
@@ -62,7 +62,7 @@ if player_input.downcase == "start"
       puts "What item would you like to use?"
       user_item = gets.chomp
       player_character.use(user_item)
-      
+
     else
       puts "Invalid command. Try 'help' if you are stuck."
     end

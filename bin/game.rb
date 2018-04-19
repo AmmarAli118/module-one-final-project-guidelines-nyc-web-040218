@@ -68,7 +68,7 @@ if player_input.downcase == "start"
         continue = false
         exit
       else
-        player_character = player_character.pick_up(string.downcase)
+        player_character.pick_up(string.downcase)
       end
 
     elsif player_command.downcase == "inventory"

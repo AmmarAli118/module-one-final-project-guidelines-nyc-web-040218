@@ -38,14 +38,13 @@ class Player < ActiveRecord::Base
 
   def pick_up(item_str)
     item_obj = parse_item_str(item_str)
-    item_obj = find_item_by_current_room(item_obj)
-    if item_obj.nil?
+    if item_obj.nil? || in_current_room?(item_obj) == false
       puts "You don't see one of those here."
     else
       string = self.room.description.split(".")
       string.pop
-      string = string.join(".")
-      Room.update(self.room_id, :description => string )
+      string = "#{string.join(".")}."
+      Room.update(self.room_id, description: string)
       Item.update(item_obj.id, in_inventory: true)
       puts "Picked up #{item_str}."
       self.reload
@@ -97,7 +96,7 @@ class Player < ActiveRecord::Base
   end
 
   def have?(item_obj)
-    if inventory_objects.include?(item_obj)
+    if item_onb.in_inventory == true
       true
     else
       puts "You do not have #{item_obj.name}!"
@@ -105,8 +104,9 @@ class Player < ActiveRecord::Base
     end
   end
 
-  def find_item_by_current_room(item_obj)
-    Item.all.find {|item| item.room_id == self.room_id}
+  def in_current_room?(item_obj)
+    item = Item.all.find {|item| item.room_id == self.room_id}
+    item == item_obj
   end
 
   def inventory_objects

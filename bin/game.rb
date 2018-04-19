@@ -56,4 +56,5 @@ if player_input.downcase == "start"
 
 elsif player_input.downcase == "exit"
   puts "Goodbye! Thanks for playing!"
+  #system rake db:reset
 end

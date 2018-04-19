@@ -22,7 +22,7 @@ class Player < ActiveRecord::Base
   end
 
   def parse_item_str(item_str)
-    Item.all.find {|item| item.name == item_str && item.room_id == self.room_id}
+    Item.all.find {|item| item.name == item_str}
   end
 
   def move(str)
@@ -41,9 +41,14 @@ class Player < ActiveRecord::Base
     end
   end
 
+  def find_item_by_current_room(item_obj)
+    Item.all.find {|item| item_obj.room_id == self.room_id}
+  end
+
   def pick_up(item_str)
     item_obj = parse_item_str(item_str)
-    if item_obj == nil
+    item_obj = find_item_by_current_room(item_obj)
+    if item_obj.nil?
       puts "You don't see one of those here."
     else
       Item.update(item_obj.id, in_inventory: true)
@@ -64,8 +69,9 @@ class Player < ActiveRecord::Base
     item1 = parse_item_str(str1)
     item2 = parse_item_str(str2)
     if have?(item1) && have?(item2)
-      if item1.category == item2.category && item1.category == "Material Component"
-        new_item = Item.all.find {|item| item.category.include?(srt1) && item.category.include?(str2)}
+      if item1.category == item2.category && item1.category == "material component"
+        new_item = Item.all.find {|item| item.category.include?(str1) && item.category.include?(str2)}
+        binding.pry
         Item.update(new_item.id, in_inventory: true)
         Item.update(item1.id, in_inventory: false, room_id: nil)
         Item.update(item2.id, in_inventory: false, room_id: nil)

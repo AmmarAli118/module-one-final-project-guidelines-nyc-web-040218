@@ -3,19 +3,17 @@ require_all 'lib'
 
 def exit
   `rake db:rollback STEP=6`
-  `rake db:migrate`
-  `rake db:seed`
   puts "Goodbye! Thanks for playing!"
 end
-#
-# prompt = TTY::Prompt.new
-# font = TTY::Font.new(:doom)
-# pastel = Pastel.new
-#
-# puts "\n"
-# puts pastel.bright_white.bold(font.write("THE       ALCHEMIST"))
-# puts "\n"
-#
+
+prompt = TTY::Prompt.new
+font = TTY::Font.new(:doom)
+pastel = Pastel.new
+
+puts "\n"
+puts pastel.bright_white.bold(font.write("THE       ALCHEMIST"))
+puts "\n"
+
 
 # prompt = TTY::Prompt.new
 # prompt.ask("Type start to begin game or exit to leave:", default: ENV['exit'])
@@ -26,12 +24,14 @@ end
 #
 # prompt.select("What do you do?", %w(Look Move Pick\ up Inventory Transmute Help))
 
-puts "Welcome to The Alchemist.\n\n"
+# puts "Welcome to The Alchemist.\n\n"
 print "Type start to begin game or exit to leave: "
 player_input = gets.chomp
 
 if player_input.downcase == "start"
   continue = true
+  `rake db:migrate`
+  `rake db:seed`
   print "\nName your character: "
   player_character_name = gets.chomp
   player_character = Player.create(player_character_name)

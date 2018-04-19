@@ -1,2 +1,2 @@
-require_relative 'config/environment'
-require_relative 'lib'
+require_relative '../config/environment.rb'
+require_relative 'game.rb'

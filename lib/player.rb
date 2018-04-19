@@ -77,7 +77,7 @@ class Player < ActiveRecord::Base
       puts "Don't destroy that, you fool!"
     else
       puts "You destroyed the #{item_str}. You monster."
-      Item.destory(item_obj.id)
+      Item.destroy(item_obj.id)
     end
   end
 
@@ -85,6 +85,7 @@ class Player < ActiveRecord::Base
     if self.room.id = 2 && Door.all.find {|a_door| a_door.room_id == 2}.is_open == false
       whole_key = parse_item_str("key")
       if have?(whole_key)
+        puts "You unlock the southern door."
         Door.update(1, :is_open => true)
       else
         puts "You need a key to unlock the door."
@@ -99,7 +100,7 @@ class Player < ActiveRecord::Base
   end
 
   def have?(item_obj)
-    if item_onb.in_inventory == true
+    if item_obj.in_inventory == true
       true
     else
       puts "You do not have #{item_obj.name}!"

@@ -4,7 +4,7 @@ room1 = Room.create(description: "You are in a small stone brick room lit with t
 
 room2 = Room.create(description: "This room looks the same as the last room but with doors to the north, south, east and west. And is that a... sledgehammer on the floor?", north: 1, east: 4, south: 5, west: 3, level: level)
 
-room3 = Room.create(description: "This room has a small window. As you look up at it you cstch a glimpse of a face ducking out of view. On the floor is half of a key.", north: nil, east: 2, south: nil, west: nil, level: level)
+room3 = Room.create(description: "This room has a small window. As you look up at it you catch a glimpse of a face ducking out of view. On the floor is half of a key.", north: nil, east: 2, south: nil, west: nil, level: level)
 
 room4 = Room.create(description: "This room has a window too. 'Of course there's a window.' you think to yourself. 'The instructors would want to watch you run through the test.' As you look at the floor you see half of a key.", north: nil, east: nil, south: nil, west: 2, level: level)
 

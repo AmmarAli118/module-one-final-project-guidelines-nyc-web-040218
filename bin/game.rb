@@ -45,7 +45,7 @@ if player_input.downcase == "start"
     elsif player_command.downcase == "pick up"
       puts "What would you like to pick up?"
       string = gets.chomp
-      player_character.pick_up(string.downcase)
+      player_character.room = player_character.pick_up(string.downcase)
 
     elsif player_command.downcase == "inventory"
       player_character.inventory

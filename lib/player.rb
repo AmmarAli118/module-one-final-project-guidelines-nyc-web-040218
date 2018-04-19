@@ -45,10 +45,10 @@ class Player < ActiveRecord::Base
       string = self.room.description.split(".")
       string.pop
       string = string.join(".")
-      binding.pry
       Room.update(self.room_id, :description => string )
       Item.update(item_obj.id, in_inventory: true)
       puts "Picked up #{item_str}."
+      self.room
     end
   end
 

@@ -45,7 +45,13 @@ if player_input.downcase == "start"
     elsif player_command.downcase == "pick up"
       puts "What would you like to pick up?"
       string = gets.chomp
-      player_character.room = player_character.pick_up(string.downcase)
+      if string.downcase == "diploma"
+        puts "You have successfully passed your test! You win!"
+        continue = false
+        exit
+      else
+        player_character.room = player_character.pick_up(string.downcase)
+      end
 
     elsif player_command.downcase == "inventory"
       player_character.inventory
@@ -62,6 +68,8 @@ if player_input.downcase == "start"
       user_item = gets.chomp
       player_character.use(user_item)
 
+    elsif player_command.downcase == "unlock"
+      player_character.unlock_door
     else
       puts "Invalid command. Try 'help' if you are stuck."
     end

@@ -81,8 +81,8 @@ class Player < ActiveRecord::Base
 
   def unlock_door
     if self.room.id = 2 && Door.all.find {|a_door| a_door.room_id == 2}.is_open == false
-      whole_key = self.parse_item_str("key")
-      if self.have?(whole_key)
+      whole_key = parse_item_str("key")
+      if have?(whole_key)
         Door.update(1, :is_open => true)
       else
         puts "You need a key to unlock the door."

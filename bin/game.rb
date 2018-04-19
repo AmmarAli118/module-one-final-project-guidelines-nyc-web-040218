@@ -30,7 +30,7 @@ if player_input.downcase == "start"
       continue = false
 
     elsif player_command.downcase == "help"
-      puts "\nPossible commands: look, move, pick up, unlock, inventory, use(for books or maps) and transmute.\n\n"
+      puts "\nPossible commands: look, move, pick up, unlock, inventory and transmute.\n\n"
 
     elsif player_command.downcase == "look"
       puts player_character.room.description

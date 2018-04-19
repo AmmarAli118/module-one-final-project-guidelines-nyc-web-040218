@@ -48,7 +48,7 @@ if player_input.downcase == "start"
       continue = false
 
     elsif player_command.downcase == "help"
-      puts "\nPossible commands: look, move, pick up, unlock, inventory and transmute.\n\n"
+      puts "\nPossible commands: look, move, pick up, unlock, drop, inventory and transmute.\n\n"
 
     elsif player_command.downcase == "look"
       puts player_character.room.description
@@ -81,7 +81,7 @@ if player_input.downcase == "start"
       string2 = gets.chomp
       player_character.combine(string1, string2)
 
-    elsif player_command.downcase == "use"
+    elsif player_command.downcase == "drop"
       puts "What item would you like to use?"
       user_item = gets.chomp
       player_character.use(user_item)

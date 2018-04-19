@@ -100,7 +100,10 @@ class Player < ActiveRecord::Base
   end
 
   def have?(item_obj)
-    if item_obj.in_inventory == true
+    if item_obj == nil
+      puts "Stop making stuff up!"
+      false
+    elsif item_obj.in_inventory == true
       true
     else
       puts "You do not have #{item_obj.name}!"

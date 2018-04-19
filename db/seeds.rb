@@ -2,7 +2,7 @@ level = Level.create(name: "Forest Temple", player_id: 1) #player_id: player.id 
 
 room1 = Room.create(description: "You are in a small stone brick room lit with two torches. There's nothing of interest here except a door to the south. And a book, alchemy for dummies, but you've already read that one.", north: nil, east: nil, south: 2, west: nil, level: level)
 
-room2 = Room.create(description: "This room looks the same as the last room but with doors to the north, south, east and west. And is that a tribble on the floor?", north: 1, east: 4, south: 5, west: 3, level: level)
+room2 = Room.create(description: "This room looks the same as the last room but with doors to the north, south, east and west. The southern door has a big lock on it. And is that a tribble on the floor?", north: 1, east: 4, south: 5, west: 3, level: level)
 
 room3 = Room.create(description: "This room has a small window. As you look up at it you catch a glimpse of a face ducking out of view. On the floor is a broken key shaft.", north: nil, east: 2, south: nil, west: nil, level: level)
 

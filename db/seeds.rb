@@ -1,8 +1,8 @@
 level = Level.create(name: "Forest Temple", player_id: 1) #player_id: player.id also works
 
-room1 = Room.create(description: "You are in a small stone brick room lit with two torches. There's nothing of interest here except a door to the south.", north: nil, east: nil, south: 2, west: nil, level: level)
+room1 = Room.create(description: "You are in a small stone brick room lit with two torches. There's nothing of interest here except a door to the south. And a book, alchemy for dummies, but you've already read that one.", north: nil, east: nil, south: 2, west: nil, level: level)
 
-room2 = Room.create(description: "This room looks the same as the last room but with doors to the north, south, east and west. And is that a sledgehammer on the floor?", north: 1, east: 4, south: 5, west: 3, level: level)
+room2 = Room.create(description: "This room looks the same as the last room but with doors to the north, south, east and west. And is that a tribble on the floor?", north: 1, east: 4, south: 5, west: 3, level: level)
 
 room3 = Room.create(description: "This room has a small window. As you look up at it you catch a glimpse of a face ducking out of view. On the floor is a broken key shaft.", north: nil, east: 2, south: nil, west: nil, level: level)
 
@@ -11,10 +11,9 @@ room4 = Room.create(description: "This room has a window too. 'Of course there's
 room5 = Room.create(description: "Finally, you've made it to the end of the test. On a table in front of you sits your diploma.", north: 2, east: nil, south: nil, west: nil, level: level)
 
 door1 = Door.create(is_open: false, room_id: 2)
-# player = Player.create(name: "Carl")
 
-map = Item.create(name: "map", category: "map", in_inventory: false, room: room1, player_id: 1)
-sledge = Item.create(name: "sledgehammer", category: "item", in_inventory: false, room: room2, player_id: 1)
+book = Item.create(name: "alchemy for dummies", category: "gag item", in_inventory: false, room: room1, player_id: 1)
+tribble = Item.create(name: "tribble", category: "gag item", in_inventory: false, room: room2, player_id: 1)
 
 key_half_one = Item.create(name: "broken key shaft", category: "material component", in_inventory: false, room: room3, player_id: 1)
 key_half_two = Item.create(name: "broken key", category: "material component", in_inventory: false, room: room4, player_id: 1)

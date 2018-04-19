@@ -15,9 +15,9 @@ class Player < ActiveRecord::Base
   def inventory
     inv = inventory_objects.map {|item| item.name}
     if inv.empty?
-      p "Your inventory is empty!"
+      puts "Your inventory is empty!"
     else
-      p "You have: a #{inv.join(", ")}"
+      puts "You have: a #{inv.join(", ")}"
     end
   end
 
@@ -29,13 +29,14 @@ class Player < ActiveRecord::Base
     cardinal = ["north", "south", "east", "west"]
     if cardinal.include?(str.downcase)
       if self.room[str.downcase.to_sym] != nil
+        puts "You move #{str}."
         Player.update(1, :room_id => self.room[str.downcase.to_sym])
       else
-        p "You just walked into a wall. Ouch!"
+        puts "You just walked into a wall. Ouch!"
         self
       end
     else
-      p "I pity the fool who thinks #{str} is a direction!"
+      puts "I pity the fool who thinks #{str} is a direction!"
       self
     end
   end
@@ -43,10 +44,10 @@ class Player < ActiveRecord::Base
   def pick_up(item_str)
     item_obj = parse_item_str(item_str)
     if item_obj == nil
-      p "You don't see one of those here."
+      puts "You don't see one of those here."
     else
       Item.update(item_obj.id, in_inventory: true)
-      p "Picked up #{item_str}."
+      puts "Picked up #{item_str}."
     end
   end
 
@@ -54,8 +55,23 @@ class Player < ActiveRecord::Base
     if inventory_objects.include?(item_obj)
       true
     else
-      puts "You do not have that item!"
+      puts "You do not have #{item_obj.name}!"
       false
+    end
+  end
+
+  def combine(str1, str2)
+    item1 = parse_item_str(str1)
+    item2 = parse_item_str(str2)
+    if have?(item1) && have?(item2)
+      if item1.category == item2.category && item1.category == "Material Component"
+        new_item = Item.all.find {|item| item.category.include?(srt1) && item.category.include?(str2)}
+        Item.update(new_item.id, in_inventory: true)
+        Item.update(item1.id, in_inventory: false, room_id: nil)
+        Item.update(item2.id, in_inventory: false, room_id: nil)
+      else
+        puts "You can't transmute those components!"
+      end
     end
   end
 

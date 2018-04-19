@@ -84,7 +84,7 @@ if player_input.downcase == "start"
     elsif player_command.downcase == "destroy"
       puts "What item would you like to destroy?"
       user_item = gets.chomp
-      player_character.drop(user_item)
+      player_character.destroy(user_item)
 
     elsif player_command.downcase == "unlock"
       player_character.unlock_door

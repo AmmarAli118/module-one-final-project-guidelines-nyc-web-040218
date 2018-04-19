@@ -17,7 +17,7 @@ class Player < ActiveRecord::Base
     if inv.empty?
       puts "Your inventory is empty!"
     else
-      puts "You have: a #{inv.join(", ")}"
+      puts "You have: a #{inv.join(", a ")}"
     end
   end
 

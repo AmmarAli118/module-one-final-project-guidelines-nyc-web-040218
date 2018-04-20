@@ -63,6 +63,7 @@ while continue == true
     puts player_character.room.description
 
   elsif player_command.downcase == "move"
+    puts "Exits are: #{player_character.room.exits}"
     puts "\nIn which direction would you like to move?"
     direction = gets.strip
     puts "\n"
@@ -82,8 +83,7 @@ while continue == true
       player_character.pick_up(string.downcase)
     end
 
-  elsif player_command.downcase == "inventory"
-    puts "\n"
+  elsif player_command.downcase == "inventory" || player_command.downcase == "inv"
     player_character.inventory
 
   elsif player_command.downcase == "transmute"

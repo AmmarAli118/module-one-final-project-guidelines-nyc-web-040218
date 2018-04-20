@@ -11,9 +11,11 @@ class Player < ActiveRecord::Base
   def inventory
     inv = inventory_objects.map {|item| item.name}
     if inv.empty?
-      puts "Your inventory is empty!"
+      puts "\nYour inventory is empty!"
+      true
     else
-      puts "You have: a #{inv.join(", a ")}"
+      puts "\nYou have: a #{inv.join(", a ")}"
+      false
     end
   end
 
@@ -121,4 +123,5 @@ class Player < ActiveRecord::Base
   def inventory_objects
     Item.all.select {|item| item.in_inventory == true}
   end
+
 end

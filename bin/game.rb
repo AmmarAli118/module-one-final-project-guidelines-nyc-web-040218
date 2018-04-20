@@ -87,20 +87,24 @@ while continue == true
     player_character.inventory
 
   elsif player_command.downcase == "transmute"
-    puts "\n"
-    puts "#{player_character.inventory}"
-    puts "What is your first item?"
-    string1 = gets.strip
-    puts "\nWhat is your second item?"
-    string2 = gets.strip
-    puts "\n"
-    player_character.combine(string1, string2)
+    if player_character.inventory
+    else
+      puts "What is your first item?"
+      string1 = gets.strip
+      puts "\nWhat is your second item?"
+      string2 = gets.strip
+      puts "\n"
+      player_character.combine(string1, string2)
+    end
 
   elsif player_command.downcase == "destroy"
-    puts "\nWhat item would you like to destroy?"
-    user_item = gets.strip
-    puts "\n"
-    player_character.destroy(user_item)
+    if player_character.inventory
+    else
+      puts "\nWhat item would you like to destroy?"
+      user_item = gets.strip
+      puts "\n"
+      player_character.destroy(user_item)
+    end
 
   elsif player_command.downcase == "unlock"
     puts "\n"

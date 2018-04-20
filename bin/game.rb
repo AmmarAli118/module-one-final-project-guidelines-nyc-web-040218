@@ -63,13 +63,17 @@ while continue == true
     puts player_character.room.description
 
   elsif player_command.downcase == "move"
-    puts "Exits are: #{player_character.room.exits}"
-    puts "\nIn which direction would you like to move?"
+    puts "\nExits are: #{player_character.room.exits}"
+    puts "In which direction would you like to move?"
     direction = gets.strip
+    current_location = player_character.room_id
     puts "\n"
     player_character = player_character.move(direction)
-    puts "\n"
-    puts player_character.room.description
+    new_location = player_character.room_id
+    if !(current_location == new_location)
+      puts "\n"
+      puts player_character.room.description
+    end
 
   elsif player_command.downcase == "pick up"
     puts "\nWhat would you like to pick up?"
